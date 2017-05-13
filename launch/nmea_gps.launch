@@ -1,0 +1,8 @@
+<launch>
+    <node name="gps_driver" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="screen">
+        <rosparam param="port"> /dev/ttyUSB1 </rosparam>
+        <rosparam param="baud"> 1000000 </rosparam>
+        
+        <remap from="/fix" to="/gps_driver/navsatfix"/>
+    </node>
+</launch>
