@@ -6,7 +6,7 @@ find_package(catkin REQUIRED COMPONENTS roslint)
 catkin_python_setup()
 catkin_package()
 
-install(PROGRAMS
+catkin_install_python(PROGRAMS
    scripts/nmea_serial_driver
    scripts/nmea_topic_driver
    scripts/nmea_topic_serial_reader
