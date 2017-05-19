@@ -59,6 +59,13 @@ def convert_latitude(field):
 def convert_longitude(field):
     return safe_float(field[0:3]) + safe_float(field[3:]) / 60.0
 
+def convert_altitude(field):
+    altitude = safe_float(field)
+    # If altitude is NaN, make it 0 so we can use GPS with the EKF
+    if altitude == float('NaN'):
+        altitude = 0
+    return altitude
+
 
 def convert_time(nmea_utc):
     # Get current time in UTC for date information
@@ -105,7 +112,7 @@ parse_maps = {
         ("latitude_direction", str, 3),
         ("longitude", convert_longitude, 4),
         ("longitude_direction", str, 5),
-        ("altitude", safe_float, 9),
+        ("altitude", convert_altitude, 9),
         ("mean_sea_level", safe_float, 11),
         ("hdop", safe_float, 8),
         ("num_satellites", safe_int, 7),
@@ -145,5 +152,6 @@ def parse_nmea_sentence(nmea_sentence):
     parsed_sentence = {}
     for entry in parse_map:
         parsed_sentence[entry[0]] = entry[1](fields[entry[2]])
+
 
     return {sentence_type: parsed_sentence}
