@@ -118,7 +118,7 @@ class RosNMEADriver(object):
                 NavSatFix.COVARIANCE_TYPE_APPROXIMATED
 
             # Altitude is above ellipsoid, so adjust for mean-sea-level
-            altitude = data['altitude'] + data['mean_sea_level']
+            altitude = 0 # data['altitude'] + data['mean_sea_level']
             current_fix.altitude = altitude
 
             self.fix_pub.publish(current_fix)
