@@ -3,6 +3,6 @@
         <rosparam param="port"> /dev/ttyUSB0 </rosparam>
         <rosparam param="baud"> 1000000 </rosparam>
         
-        <remap from="/fix" to="/gps_driver/navsatfix"/>
+        <remap from="/fix" to="/gps/navsatfix"/>
     </node>
 </launch>
